@@ -1,0 +1,90 @@
+/* colours, fonts, resets */
+
+:root {
+  /* tcsa colours */
+  --cream: #f1f4d5;
+  --cream-deep: #e4e8c4;
+  --olive-900: #31420e; /* headings, dark panels */
+  --olive: #6e883f; /* buttons, progress */
+  --olive-300: #92aa62; /* preview panel */
+  --olive-200: #b5cc8c; /* list rows */
+  --olive-100: #d6e1bb;
+  --navy: #1d2e36; /* footer, dashboard headings, active tab */
+  --orange: #dc7101; /* primary actions */
+  --orange-dark: #b95d00;
+  --sage: #e3ebe1; /* report section panels */
+  --hex-green: #9caf6c;
+  --hex-grey: #737f72;
+  --danger: #d1281f;
+  --white: #ffffff;
+
+  --surface: #f9fbec; /* cards sitting on the cream panel */
+  --line: rgba(29, 46, 54, 0.14); /* soft borders */
+  --line-strong: rgba(29, 46, 54, 0.28);
+
+  /* space around the panels */
+  --gutter-x: clamp(12px, 4vw, 72px);
+  --gutter-y: clamp(10px, 1.6vw, 22px);
+  --page-pad: clamp(16px, 3.2vw, 56px); /* inner padding of a panel */
+
+  --text: #16201f;
+  --muted: #4b5652;
+
+  --font-display: 'Lilita One', 'Poppins', system-ui, sans-serif;
+  --font-heading: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Figtree', system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 18px;
+  --shadow-btn: 0 3px 6px rgba(29, 46, 54, 0.22);
+  --shadow-card: 0 10px 30px rgba(49, 66, 14, 0.15);
+  --shadow-soft: 0 1px 2px rgba(29, 46, 54, 0.06), 0 4px 14px rgba(29, 46, 54, 0.06);
+  --shadow-panel: 0 20px 50px rgba(49, 66, 14, 0.18), 0 2px 6px rgba(49, 66, 14, 0.08);
+
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  line-height: 1.45;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  line-height: 1.15;
+}
