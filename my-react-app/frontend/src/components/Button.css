@@ -1,0 +1,81 @@
+.shared-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 146px;
+  padding: 7px 18px;
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: background-color 0.15s, transform 0.1s, color 0.15s;
+}
+
+.shared-button:active {
+  transform: translateY(1px);
+}
+
+.shared-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.shared-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* orange */
+.shared-button-primary {
+  background: var(--orange);
+  color: #fff;
+}
+.shared-button-primary:hover {
+  background: var(--orange-dark);
+}
+
+/* olive - cancel, mark complete etc */
+.shared-button-secondary {
+  background: var(--olive);
+  color: #fff;
+}
+.shared-button-secondary:hover {
+  background: #5d7533;
+}
+
+/* dark */
+.shared-button-dark {
+  background: var(--olive-900);
+  color: #fff;
+}
+.shared-button-dark:hover {
+  background: #24310a;
+}
+
+/* outline */
+.shared-button-outline {
+  background: var(--cream);
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.shared-button-outline:hover {
+  background: #fff;
+}
+
+/* big round one on login */
+.shared-button-pill {
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  padding: 14px 20px;
+  white-space: nowrap;
+  width: 100%;
+  box-shadow: 0 8px 18px rgba(220, 113, 1, 0.28);
+}

@@ -120,3 +120,16 @@ h4 {
 .app-main {
   flex: 1;
 }
+
+/* hex background */
+.shared-page-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+}
