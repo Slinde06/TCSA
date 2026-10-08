@@ -1,9 +1,16 @@
+import { Routes, Route, Navigate } from 'react-router-dom'
+
+import LandingPage from './pages/LandingPage.jsx'
+
 function App() {
   return (
     <div className="app">
       <main className="app-main">
-        <h1>TCSA</h1>
-        <p>Tortoise Conservation South Africa - coming soon.</p>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
     </div>
   )
