@@ -1,0 +1,35 @@
+.dashboard-footer {
+  margin-top: auto;
+  padding: 18px var(--page-pad);
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.dashboard-footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px clamp(8px, 3vw, 40px);
+}
+
+.dashboard-footer-link {
+  position: relative;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: rgba(241, 244, 213, 0.75);
+  text-decoration: none;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.dashboard-footer-link:hover {
+  color: var(--cream);
+  background: rgba(241, 244, 213, 0.08);
+}
+
+.dashboard-footer-link.active {
+  color: var(--cream);
+  background: rgba(241, 244, 213, 0.14);
+}
