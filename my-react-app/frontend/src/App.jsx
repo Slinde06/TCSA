@@ -8,6 +8,8 @@ import LandingPage from './pages/LandingPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx'
 import TodayPage from './pages/TodayPage.jsx'
+import AnimalPage from './pages/AnimalPage.jsx'
+import AnimalProfilePage from './pages/AnimalProfilePage.jsx'
 
 function App() {
   const { pathname } = useLocation()
@@ -26,6 +28,8 @@ function App() {
             {/* dashboard */}
             <Route element={<DashboardLayout />}>
               <Route path="/today" element={<TodayPage />} />
+              <Route path="/animals" element={<AnimalPage />} />
+              <Route path="/animals/:id" element={<AnimalProfilePage />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace />} />
