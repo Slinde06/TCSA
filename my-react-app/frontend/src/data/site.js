@@ -1,5 +1,3 @@
-// contact info used on landing, footer and reports
-
 export const CONTACT = {
   name: 'Dirk Barnard',
   whatsappDisplay: '071 309 1665',
@@ -18,3 +16,5 @@ export const BANK = {
 export const RESCUE_ROAST_URL = 'https://www.rescueroast.co.za'
 
 export const NPC_NUMBER = '2025/216598/08'
+
+export const SHOW_FORGOT_PASSWORD = false

@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { CloseIcon } from './Icons.jsx'
 
-// popup - closes with Esc, the X or clicking outside
-// dark = add task, olive = delete confirm
 function Modal({ title, onClose, tone = 'dark', size = 'md', children, titleClassName = '' }) {
   const panelRef = useRef(null)
 

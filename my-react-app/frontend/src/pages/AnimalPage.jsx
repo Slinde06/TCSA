@@ -11,7 +11,6 @@ import {
 } from '../components/AnimalBits.jsx'
 import { ChevronLeftIcon } from '../components/Icons.jsx'
 
-// list (or preview) left, stats right
 function AnimalPage() {
   const { animals, getAnimal } = useDashboard()
   const [query, setQuery] = useState('')

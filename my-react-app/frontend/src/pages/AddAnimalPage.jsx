@@ -5,6 +5,7 @@ import Field from '../components/Field.jsx'
 import { CameraIcon, CheckIcon, ChevronLeftIcon, TortoiseIcon } from '../components/Icons.jsx'
 import { useDashboard } from '../context/dashboardContext.js'
 import { nextAnimalId, toISODate, uid } from '../data/helpers.js'
+import { photoFromFile } from '../data/photos.js'
 
 const SPECIES = [
   'Leopard Tortoise',
@@ -42,11 +43,17 @@ function AddAnimalPage() {
   const [species, setSpecies] = useState('')
   const [generatedId, setGeneratedId] = useState('')
   const [error, setError] = useState('')
+  const [saving, setSaving] = useState(false)
 
-  function handlePhoto(e) {
+  async function handlePhoto(e) {
     const file = e.target.files?.[0]
-    // preview only, not saved anywhere yet
-    if (file) setPhoto(URL.createObjectURL(file))
+    e.target.value = ''
+    if (!file) return
+    try {
+      setPhoto(await photoFromFile(file))
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   function generateId() {
@@ -58,7 +65,7 @@ function AddAnimalPage() {
     setGeneratedId(nextAnimalId(species, animals))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const f = Object.fromEntries(new FormData(e.currentTarget))
     if (!f.species.trim() || !f.enclosure.trim()) {
@@ -74,7 +81,9 @@ function AddAnimalPage() {
         .map((s) => s.trim())
         .filter(Boolean)
 
-    addAnimal({
+    setSaving(true)
+    setError('')
+    const saved = await addAnimal({
       id,
       species: f.species.trim(),
       enclosure: f.enclosure.trim(),
@@ -108,8 +117,12 @@ function AddAnimalPage() {
       })),
       requiredTests: f.requiredTests,
       notes: f.notes,
+    }).catch((err) => {
+      setError(err.message)
+      return null
     })
-    navigate(`/animals/${id}`)
+    setSaving(false)
+    if (saved) navigate(`/animals/${saved.id}`)
   }
 
   return (
@@ -209,8 +222,8 @@ function AddAnimalPage() {
 
             <div className="shared-form-grid shared-form-cols-3 addanimal-measurements">
               <Field label="Weight" type="number" step="0.01" min="0" name="weight" suffix="kg" placeholder="0.00" />
-              <Field label="Shell Length" type="number" min="0" name="length" suffix="mm" placeholder="0" />
-              <Field label="Shell Width" type="number" min="0" name="width" suffix="mm" placeholder="0" />
+              <Field label="Length" type="number" min="0" name="length" suffix="mm" placeholder="0" />
+              <Field label="Width" type="number" min="0" name="width" suffix="mm" placeholder="0" />
             </div>
 
             <div className="addanimal-divider" />
@@ -245,7 +258,9 @@ function AddAnimalPage() {
             <Button variant="outline" onClick={() => navigate('/animals')}>
               Cancel
             </Button>
-            <Button type="submit">Save Animal</Button>
+            <Button type="submit" disabled={saving}>
+              {saving ? 'Saving…' : 'Save Animal'}
+            </Button>
           </div>
         </div>
       </form>

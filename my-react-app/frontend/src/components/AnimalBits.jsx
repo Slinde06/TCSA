@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { animalStats } from '../data/helpers.js'
 import { SearchIcon, TortoiseIcon, ChameleonIcon, SnakeIcon } from './Icons.jsx'
 
-// shows a silhouette if theres no photo
 export function AnimalPhoto({ animal, className = '' }) {
   if (animal.photo) {
     return <img className={`dashboard-animal-photo ${className}`} src={animal.photo} alt={`${animal.id}, ${animal.species}`} />
@@ -31,7 +30,6 @@ export function AnimalIdentity({ animal, linked = true }) {
   )
 }
 
-// stat cards + bars, animals and reports page
 export function StatsPanel({ animals }) {
   const stats = animalStats(animals)
   const total = Math.max(1, animals.length)

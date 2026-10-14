@@ -7,7 +7,6 @@ const PAGES = [
   { to: '/reports', label: 'Reports' },
 ]
 
-// footer links for the 3 dashboard pages
 function DashFooter() {
   return (
     <footer className="dashboard-footer">

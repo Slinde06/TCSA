@@ -7,8 +7,7 @@ import { AnimalIdentity, AnimalPhoto } from '../components/AnimalBits.jsx'
 import { ArrowLeftIcon, CameraIcon, CheckIcon, PencilIcon, PlusIcon, TrashIcon } from '../components/Icons.jsx'
 import { useDashboard } from '../context/dashboardContext.js'
 import { formatDate, sa, toISODate, uid } from '../data/helpers.js'
-
-// profile page with the 5 tabs, each one can add / edit / delete
+import { photoFromFile, photosFromFiles } from '../data/photos.js'
 
 const TABS = ['Measurements', 'Medication', 'Diet', 'Tests', 'Photos']
 
@@ -78,8 +77,8 @@ function AnimalProfilePage() {
         <ConfirmDelete
           title="Are you sure you want to delete this profile?"
           onCancel={() => setConfirmDelete(false)}
-          onConfirm={() => {
-            deleteAnimal(animal.id)
+          onConfirm={async () => {
+            await deleteAnimal(animal.id).catch(() => setConfirmDelete(false))
             navigate('/animals')
           }}
         />
@@ -88,8 +87,6 @@ function AnimalProfilePage() {
   )
 }
 
-
-// are you sure popup
 function ConfirmDelete({ title, text = 'This action cannot be reversed', onCancel, onConfirm }) {
   return (
     <Modal title={title} tone="olive" size="sm" titleClassName="shared-confirm-title" onClose={onCancel}>
@@ -137,7 +134,6 @@ function RowActions({ label, onEdit, onDelete }) {
 
 function FormCard({ title, onSubmit, onCancel, columns = 2, submitLabel = 'Save Changes', children }) {
   const ref = useRef(null)
-  // scroll to form
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
     ref.current?.querySelector('input, select, textarea')?.focus({ preventScroll: true })
@@ -160,7 +156,6 @@ function FormCard({ title, onSubmit, onCancel, columns = 2, submitLabel = 'Save 
 const formData = (e) => Object.fromEntries(new FormData(e.currentTarget))
 const byDate = (list) => [...list].sort((a, b) => (a.date || '').localeCompare(b.date || ''))
 
-// editing is null, 'new' or the row being edited
 function useRecordEditor(listName, update) {
   const [editing, setEditing] = useState(null)
   const [deleting, setDeleting] = useState(null)
@@ -188,7 +183,6 @@ function useRecordEditor(listName, update) {
   return { editing, setEditing, deleting, setDeleting, save, remove, current, isNew: editing === 'new' }
 }
 
-// MEASUREMENTS
 function MeasurementsTab({ animal, update }) {
   const { addTask } = useDashboard()
   const ed = useRecordEditor('measurements', update)
@@ -276,7 +270,6 @@ function MeasurementsTab({ animal, update }) {
   )
 }
 
-// MEDICATION
 function MedicationTab({ animal, update }) {
   const { addTask } = useDashboard()
   const ed = useRecordEditor('medications', update)
@@ -386,8 +379,6 @@ function MedicationTab({ animal, update }) {
   )
 }
 
-// DIET
-// plan at the top, list of changes under it
 function DietTab({ animal, update }) {
   const [editingPlan, setEditingPlan] = useState(false)
   const [clearing, setClearing] = useState(false)
@@ -514,7 +505,6 @@ function ReadOnly({ label, value }) {
   )
 }
 
-// TESTS
 function TestsTab({ animal, update }) {
   const { addTask } = useDashboard()
   const ed = useRecordEditor('tests', update)
@@ -597,26 +587,45 @@ function TestsTab({ animal, update }) {
   )
 }
 
-// PHOTOS
 function PhotosTab({ animal, update }) {
   const [deleting, setDeleting] = useState(null)
+  const [busy, setBusy] = useState(false)
+  const [photoError, setPhotoError] = useState('')
 
-  function upload(e) {
-    const urls = [...e.target.files].map((file) => URL.createObjectURL(file))
-    if (urls.length) update((a) => ({ ...a, photo: a.photo || urls[0], photos: [...a.photos, ...urls] }))
+  async function upload(e) {
+    const files = [...e.target.files]
     e.target.value = ''
+    if (!files.length) return
+    setBusy(true)
+    setPhotoError('')
+    try {
+      const added = (await photosFromFiles(files)).filter((src) => !animal.photos.includes(src))
+      if (added.length) update((a) => ({ ...a, photo: a.photo || added[0], photos: [...a.photos, ...added] }))
+    } catch (err) {
+      setPhotoError(err.message)
+    } finally {
+      setBusy(false)
+    }
   }
 
-  function replace(oldSrc, e) {
+  async function replace(oldSrc, e) {
     const file = e.target.files?.[0]
-    if (!file) return
-    const src = URL.createObjectURL(file)
-    update((a) => ({
-      ...a,
-      photo: a.photo === oldSrc ? src : a.photo,
-      photos: a.photos.map((p) => (p === oldSrc ? src : p)),
-    }))
     e.target.value = ''
+    if (!file) return
+    setBusy(true)
+    setPhotoError('')
+    try {
+      const src = await photoFromFile(file)
+      update((a) => ({
+        ...a,
+        photo: a.photo === oldSrc ? src : a.photo,
+        photos: a.photos.map((p) => (p === oldSrc ? src : p)),
+      }))
+    } catch (err) {
+      setPhotoError(err.message)
+    } finally {
+      setBusy(false)
+    }
   }
 
   function remove() {
@@ -631,10 +640,12 @@ function PhotosTab({ animal, update }) {
     <>
       <SectionHead title="Photos">
         <label className="shared-button shared-button-secondary profile-upload">
-          <PlusIcon /> Add photos
-          <input type="file" accept="image/*" multiple onChange={upload} className="sr-only" />
+          <PlusIcon /> {busy ? 'Adding…' : 'Add photos'}
+          <input type="file" accept="image/*" multiple onChange={upload} className="sr-only" disabled={busy} />
         </label>
       </SectionHead>
+
+      {photoError && <p className="login-error" role="alert">{photoError}</p>}
 
       {animal.photos.length ? (
         <div className="profile-photo-grid">

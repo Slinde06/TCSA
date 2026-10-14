@@ -1,5 +1,3 @@
-/* landing page */
-
 .landing-page {
   overflow-x: clip;
 }
@@ -18,7 +16,6 @@
   color: var(--olive-900);
   margin-bottom: 40px;
 }
-
 
 .landing-hero {
   position: relative;
@@ -91,7 +88,6 @@
   color: var(--navy);
 }
 
-/* contact = orange */
 .landing-navbutton:last-child {
   background: var(--orange);
   color: #fff;
@@ -131,7 +127,6 @@
   font-size: 0.85rem;
 }
 
-/* about */
 .landing-about {
   min-height: min(100vh);
   position: relative;
@@ -191,7 +186,6 @@
   flex-shrink: 0;
 }
 
-/* gallery strip */
 .landing-photostrip {
   display: grid;
   grid-template-columns: 1fr 1.18fr 0.79fr 1fr;
@@ -204,7 +198,6 @@
   object-fit: cover;
 }
 
-/* support */
 .landing-support {
    min-height: min(100vh);
   position: relative;
@@ -268,13 +261,11 @@
   filter: drop-shadow(10px 14px 14px rgba(0, 0, 0, 0.25));
 }
 
-/* shell divider */
 .landing-shell-divider {
   position: relative;
   height: 270px;
 }
 
-/* endorsements & sponsors */
 .landing-partners {
   padding: 40px 0 90px;
 }
@@ -348,7 +339,6 @@
   color: inherit;
 }
 
-/* responsive */
 @media (max-width: 860px) {
   .landing-columns-about,
   .landing-support-grid,

@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react'
 import './ShapeGrid.css'
 
-// canvas grid that slowly moves, no hover
 const ShapeGrid = ({ direction = 'right', speed = 1, borderColor = '#999', squareSize = 40, shape = 'square', className = '' }) => {
   const canvasRef = useRef(null)
 

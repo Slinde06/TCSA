@@ -1,6 +1,5 @@
 import './Hexagons.css'
 
-// shell shapes (filled hexagon + outline behind it)
 const SCUTE =
   'M30 8 L72 6 Q79 6 82 12 L97 45 Q99 50 96 55 L79 88 Q76 94 69 94 L27 95 Q20 95 17 89 L3 56 Q1 50 4 45 L22 12 Q25 8 30 8Z'
 

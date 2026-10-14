@@ -14,7 +14,6 @@ import { CONTACT } from '../data/site.js'
 import { filterAnimals, formatDate, sa } from '../data/helpers.js'
 import logo from '../assets/logo-badge-light.png'
 
-// animal id is in the url so the profile's print button can link here
 function ReportPage() {
   const { animals, getAnimal } = useDashboard()
   const [params, setParams] = useSearchParams()
@@ -79,9 +78,13 @@ function ReportPage() {
 }
 
 function AnimalReport({ animal }) {
+  const { updateAnimal } = useDashboard()
   const [notes, setNotes] = useState(animal.notes || '')
 
-  // same test done more than once goes in one row
+  function saveNotes() {
+    if (notes !== (animal.notes || '')) updateAnimal(animal.id, (a) => ({ ...a, notes }))
+  }
+
   const tests = Object.values(
     animal.tests.reduce((groups, t) => {
       ;(groups[t.name] ||= { name: t.name, entries: [] }).entries.push(t)
@@ -266,10 +269,10 @@ function AnimalReport({ animal }) {
           className="reports-document-notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
+          onBlur={saveNotes}
           rows={5}
           placeholder="Type any extra notes for this report…"
         />
-        {/* textarea gets cut off when printing so print this instead */}
         <div className="reports-printed-notes">{notes || '—'}</div>
       </section>
     </article>

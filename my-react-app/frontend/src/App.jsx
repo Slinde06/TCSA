@@ -4,6 +4,7 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import DashboardLayout from './components/DashboardLayout.jsx'
 import PageBackground from './components/PageBackground.jsx'
 import { DashboardProvider } from './context/DashboardData.jsx'
+import { SHOW_FORGOT_PASSWORD } from './data/site.js'
 
 import LandingPage from './pages/LandingPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
@@ -14,7 +15,6 @@ import AnimalProfilePage from './pages/AnimalProfilePage.jsx'
 import AddAnimalPage from './pages/AddAnimalPage.jsx'
 import ReportPage from './pages/ReportPage.jsx'
 
-// go to top on page change
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
@@ -28,7 +28,7 @@ function App() {
   const isLanding = pathname === '/'
 
   return (
-    <DashboardProvider>
+    <>
       <ScrollToTop />
       {!isLanding && <PageBackground />}
       <div className="app">
@@ -36,10 +36,15 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            {SHOW_FORGOT_PASSWORD && <Route path="/forgot-password" element={<ForgotPasswordPage />} />}
 
-            {/* dashboard */}
-            <Route element={<DashboardLayout />}>
+            <Route
+              element={
+                <DashboardProvider>
+                  <DashboardLayout />
+                </DashboardProvider>
+              }
+            >
               <Route path="/today" element={<TodayPage />} />
               <Route path="/animals" element={<AnimalPage />} />
               <Route path="/animals/new" element={<AddAnimalPage />} />
@@ -51,7 +56,7 @@ function App() {
           </Routes>
         </main>
       </div>
-    </DashboardProvider>
+    </>
   )
 }
 

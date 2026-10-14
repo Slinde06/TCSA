@@ -15,7 +15,6 @@ function ForgotPasswordPage() {
       setError('Please enter your username and a new password.')
       return
     }
-    // todo - reset email
     setError('')
     setDone(true)
   }

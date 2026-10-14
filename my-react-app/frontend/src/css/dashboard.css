@@ -1,7 +1,4 @@
-/* dashboard pages */
-
 .dashboard {
-  /* cream panel, hexagons show on the sides */
   position: relative;
   width: calc(100% - 2 * var(--gutter-x));
   max-width: 1800px;
@@ -30,7 +27,6 @@
   padding-right: var(--page-pad);
 }
 
-/* header */
 .dashboard-header {
   width: 100%;
   max-width: 1560px;
@@ -68,6 +64,63 @@
   white-space: nowrap;
 }
 
+.dashboard-user-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dashboard-logout {
+  padding: 8px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--navy);
+  cursor: pointer;
+}
+
+.dashboard-logout:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--cream);
+}
+
+.dashboard-save-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 1560px;
+  margin: 16px auto 0;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(209, 40, 31, 0.1);
+  color: var(--danger);
+  font-weight: 600;
+  width: calc(100% - 2 * var(--page-pad));
+}
+
+.dashboard-save-error button {
+  padding: 4px 12px;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.dashboard-status {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 80px 20px;
+  color: var(--muted);
+  text-align: center;
+}
+
 .dashboard-profile-pic {
   display: grid;
   place-items: center;
@@ -91,7 +144,6 @@
   border-bottom: 1px solid var(--line);
 }
 
-/* tabs */
 .dashboard-tabs {
   display: inline-flex;
   gap: 4px;
@@ -123,7 +175,6 @@
   box-shadow: 0 2px 6px rgba(29, 46, 54, 0.25);
 }
 
-/* headings */
 .dashboard-page {
   padding-top: clamp(20px, 2.6vw, 32px);
 }
@@ -164,7 +215,6 @@
   text-align: center;
 }
 
-/* progress + stat cards */
 .today-header {
   display: flex;
   justify-content: space-between;
@@ -226,7 +276,6 @@
   overflow: hidden;
 }
 
-/* coloured line on the left */
 .dashboard-stat-card::before {
   content: '';
   position: absolute;
@@ -258,7 +307,6 @@
   color: var(--danger);
 }
 
-/* today timeline */
 .today-timeline-title {
   margin: 36px 0 14px;
 }
@@ -375,7 +423,6 @@
   margin-top: 20px;
 }
 
-/* animals page */
 .animals-search-row {
   max-width: 460px;
   margin-top: 12px;
@@ -640,7 +687,6 @@
   background: var(--olive);
 }
 
-/* profile banner + tabs */
 .profile-banner {
   position: relative;
   display: grid;
@@ -704,7 +750,6 @@
   gap: 10px;
 }
 
-/* pencil + bin */
 .profile-head-actions {
   width: 96px;
 }
@@ -744,7 +789,6 @@
   margin-top: 14px;
 }
 
-/* tables */
 .profile-table-wrap {
   overflow-x: auto;
 }
@@ -786,9 +830,6 @@
   background: rgba(110, 136, 63, 0.06);
 }
 
-
-
-
 .profile-table tr.is-done {
   opacity: 0.55;
 }
@@ -828,7 +869,6 @@
   color: var(--olive-900);
 }
 
-/* forms */
 .shared-field {
   display: flex;
   flex-direction: column;
@@ -958,7 +998,6 @@
   gap: 14px;
 }
 
-/* photos */
 .profile-upload {
   cursor: pointer;
 }
@@ -1028,7 +1067,6 @@
   color: var(--danger);
 }
 
-/* add new animal */
 .addanimal-header {
   display: flex;
   justify-content: space-between;
@@ -1144,7 +1182,6 @@
   color: var(--muted);
 }
 
-/* photo upload box */
 .addanimal-photo {
   position: relative;
   display: grid;
@@ -1221,7 +1258,6 @@
   min-height: 42px;
 }
 
-/* good / fair / poor / critical */
 .addanimal-conditions {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1288,7 +1324,6 @@
   gap: 12px;
 }
 
-/* kg / mm */
 .shared-unit-field {
   position: relative;
 }
@@ -1407,7 +1442,6 @@
   }
 }
 
-/* modal */
 .shared-modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1488,7 +1522,6 @@
   color: var(--cream);
 }
 
-/* full width so it lines up with cancel */
 .shared-modal-dark .shared-field > input,
 .shared-modal-dark .shared-field-select {
   width: 100%;
@@ -1541,7 +1574,6 @@
   }
 }
 
-/* reports */
 .reports-banner {
   display: flex;
   justify-content: space-between;
@@ -1676,7 +1708,6 @@
   margin-bottom: 16px;
 }
 
-
 .reports-document-table {
   width: 100%;
   border-collapse: collapse;
@@ -1755,7 +1786,6 @@
   margin-top: 14px;
 }
 
-/* print - only the report shows */
 @page {
   margin: 14mm 12mm;
 }
@@ -1823,7 +1853,6 @@
   }
 }
 
-/* responsive */
 @media (max-width: 1200px) {
   .today-timeline-row {
     grid-template-columns: 30px 100px 70px minmax(70px, 0.7fr) minmax(120px, 1.5fr) auto;
@@ -1894,7 +1923,6 @@
     padding: 3px;
   }
 
-  /* full width tabs on phone */
   .dashboard-tabs {
     display: flex;
     width: 100%;
@@ -1915,7 +1943,6 @@
     gap: 10px;
   }
 
-  /* scroll sideways */
   .profile-tabs {
     flex-wrap: nowrap;
     overflow-x: auto;

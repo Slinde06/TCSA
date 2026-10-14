@@ -1,6 +1,3 @@
-// date, id and category helpers
-
-// yyyy-mm-dd to dd/mm/yyyy
 export function formatDate(iso) {
   if (!iso) return '—'
   const [y, m, d] = iso.split('-')
@@ -8,7 +5,6 @@ export function formatDate(iso) {
   return `${d}/${m}/${y}`
 }
 
-// local date as yyyy-mm-dd
 export function toISODate(date = new Date()) {
   const y = date.getFullYear()
   const m = String(date.getMonth() + 1).padStart(2, '0')
@@ -25,7 +21,6 @@ export function uid() {
   return Math.random().toString(36).slice(2, 10)
 }
 
-// tortoise / chameleon / snake etc from the species name
 export function categoryFor(species = '') {
   const s = species.toLowerCase()
   if (s.includes('tortoise') || s.includes('padloper') || s.includes('terrapin') || s.includes('turtle')) return 'tortoise'
@@ -35,13 +30,11 @@ export function categoryFor(species = '') {
   return 'other'
 }
 
-// first 3 letters of the species
 export function idPrefixFor(species = '') {
   const letters = species.replace(/[^a-zA-Z]/g, '').toUpperCase()
   return (letters.slice(0, 3) || 'ANI').padEnd(3, 'X')
 }
 
-// next free number for that species prefix
 export function nextAnimalId(species, animals) {
   const prefix = idPrefixFor(species)
   const used = animals
@@ -61,7 +54,6 @@ export function taskStatus(task, now = new Date()) {
   return 'Upcoming'
 }
 
-// numbers for the stat cards
 export function animalStats(animals) {
   const count = (cat) => animals.filter((a) => a.category === cat).length
   const leopard = animals.filter((a) => a.species.toLowerCase().includes('leopard')).length
@@ -79,7 +71,6 @@ export function animalStats(animals) {
   }
 }
 
-// comma decimals
 export function sa(n) {
   return n === '' || n == null ? '—' : String(n).replace('.', ',')
 }

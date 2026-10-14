@@ -1,7 +1,6 @@
 import shellPattern from '../assets/shell-pattern.png'
 import '../css/auth.css'
 
-// used by login and forgot password
 function AuthLayout({ title, subtitle, children }) {
   return (
     <section className="login-page">

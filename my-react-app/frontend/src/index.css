@@ -1,31 +1,27 @@
-/* colours, fonts, resets */
-
 :root {
-  /* tcsa colours */
   --cream: #f1f4d5;
   --cream-deep: #e4e8c4;
-  --olive-900: #31420e; /* headings, dark panels */
-  --olive: #6e883f; /* buttons, progress */
-  --olive-300: #92aa62; /* preview panel */
-  --olive-200: #b5cc8c; /* list rows */
+  --olive-900: #31420e;
+  --olive: #6e883f;
+  --olive-300: #92aa62;
+  --olive-200: #b5cc8c;
   --olive-100: #d6e1bb;
-  --navy: #1d2e36; /* footer, dashboard headings, active tab */
-  --orange: #dc7101; /* primary actions */
+  --navy: #1d2e36;
+  --orange: #dc7101;
   --orange-dark: #b95d00;
-  --sage: #e3ebe1; /* report section panels */
+  --sage: #e3ebe1;
   --hex-green: #9caf6c;
   --hex-grey: #737f72;
   --danger: #d1281f;
   --white: #ffffff;
 
-  --surface: #f9fbec; /* cards sitting on the cream panel */
-  --line: rgba(29, 46, 54, 0.14); /* soft borders */
+  --surface: #f9fbec;
+  --line: rgba(29, 46, 54, 0.14);
   --line-strong: rgba(29, 46, 54, 0.28);
 
-  /* space around the panels */
   --gutter-x: clamp(12px, 4vw, 72px);
   --gutter-y: clamp(10px, 1.6vw, 22px);
-  --page-pad: clamp(16px, 3.2vw, 56px); /* inner padding of a panel */
+  --page-pad: clamp(16px, 3.2vw, 56px);
 
   --text: #16201f;
   --muted: #4b5652;
@@ -89,7 +85,6 @@ h4 {
   line-height: 1.15;
 }
 
-/* lilita headings */
 .shared-display {
   font-family: var(--font-display);
   font-weight: 400;
@@ -121,7 +116,6 @@ h4 {
   flex: 1;
 }
 
-/* hex background */
 .shared-page-background {
   position: fixed;
   inset: 0;

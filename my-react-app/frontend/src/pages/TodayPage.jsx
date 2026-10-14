@@ -16,7 +16,6 @@ const REPEAT_OPTIONS = [
 ]
 const STATUS_ORDER = { Overdue: 0, 'Due Soon': 1, 'Due Today': 2, Upcoming: 3, Completed: 4 }
 
-// update every minute for overdue / due soon
 function useNow() {
   const [now, setNow] = useState(() => new Date())
   useEffect(() => {
@@ -32,7 +31,6 @@ function TodayPage() {
   const now = useNow()
   const today = toISODate(now)
 
-  // today + old ones not done
   const rows = useMemo(
     () =>
       tasks
@@ -125,22 +123,22 @@ function AddTaskModal({ onClose }) {
   const { animals, addTask } = useDashboard()
   const [error, setError] = useState('')
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const f = Object.fromEntries(new FormData(e.currentTarget))
     if (!f.description.trim()) {
       setError('Please add a task description.')
       return
     }
-    addTask({
+    const saved = await addTask({
       animalId: f.animalId,
       type: f.type,
       description: f.description.trim(),
       date: f.date,
       time: f.time,
       repeat: f.repeat,
-    })
-    onClose()
+    }).catch((err) => setError(err.message))
+    if (saved) onClose()
   }
 
   return (

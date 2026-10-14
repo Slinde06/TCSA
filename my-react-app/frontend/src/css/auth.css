@@ -1,8 +1,6 @@
-/* login + forgot password */
-
 .login-page {
   padding: var(--gutter-y) var(--gutter-x);
-  background: transparent; /* lets the hexagon grid show through */
+  background: transparent;
 }
 
 .login-card {
@@ -94,7 +92,6 @@
   margin-top: clamp(36px, 6vh, 56px);
 }
 
-/* tortoise on the button */
 .login-submit .login-tortoise {
   position: absolute;
   right: 30px;
@@ -129,7 +126,6 @@
   font-weight: 600;
 }
 
-/* shell pattern */
 .login-shell-art {
   position: absolute;
   top: 0;

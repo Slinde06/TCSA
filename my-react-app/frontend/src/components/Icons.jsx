@@ -1,5 +1,3 @@
-// svg icons, colour comes from the text colour
-
 function Svg({ size = 24, children, viewBox = '0 0 24 24', ...props }) {
   return (
     <svg
@@ -83,8 +81,6 @@ export const CheckIcon = (p) => (
   </Svg>
 )
 
-// contact icons
-
 export const WhatsAppIcon = ({ size = 42 }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" fill="currentColor">
     <path d="M16 2.7A13.2 13.2 0 004.6 22.6L2.8 29.2l6.8-1.8A13.3 13.3 0 1016 2.7zm0 24.1a10.9 10.9 0 01-5.6-1.5l-.4-.2-4 1 1.1-3.9-.3-.4A10.9 10.9 0 1116 26.8z" />
@@ -104,14 +100,10 @@ export const FacebookIcon = ({ size = 42 }) => (
   </svg>
 )
 
-// animals
-
 export const TortoiseIcon = ({ size = 110, ...p }) => (
   <svg width={size} height={size * 0.6} viewBox="0 0 120 72" fill="currentColor" aria-hidden="true" {...p}>
-    {/* shell */}
     <path d="M18 46c0-20 17-34 39-34s40 13 42 34z" />
     <path d="M12 46h92a3 3 0 010 6H15a3 3 0 01-3-3z" />
-    {/* head + neck */}
     <path d="M98 40c4-9 10-13 16-11 5 2 5 9 1 11-3 2-7 1-9 3l-6 7z" />
     <path d="M24 50h13l-2 15a3 3 0 01-3 3h-6a3 3 0 01-3-3zM74 50h14l-1 15a3 3 0 01-3 3h-7a3 3 0 01-3-3z" />
     <path d="M18 44l-12 4 12 3z" />
@@ -129,10 +121,8 @@ export const ChameleonIcon = ({ size = 90, ...p }) => (
   <svg width={size} height={size * 0.9} viewBox="0 0 100 90" fill="currentColor" aria-hidden="true" {...p}>
     <path d="M30 34c4-18 22-28 40-24 16 4 26 18 24 34-2 13-12 22-24 23-6 0-10-4-10-9 0-6 5-9 10-8 4 1 6 4 5 7" stroke="currentColor" strokeWidth="0" />
     <path d="M28 32c3-15 18-26 36-25 18 1 32 15 32 33 0 16-13 29-28 29-9 0-15-6-15-13s6-12 12-11c6 0 9 5 8 9-1 3-4 4-6 3" fill="none" stroke="currentColor" strokeWidth="9" strokeLinecap="round" />
-    {/* head */}
     <path d="M2 30c4-12 16-20 30-18l6 16-14 8-22 2z" />
     <circle cx="20" cy="24" r="3.2" fill="var(--cream, #f1f4d5)" />
-    {/* branch */}
     <rect x="0" y="40" width="60" height="5" rx="2.5" />
     <path d="M30 34l-4 9h7zM52 46l-3 -3h8z" />
   </svg>

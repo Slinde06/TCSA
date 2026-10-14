@@ -1,6 +1,5 @@
 import ShapeGrid from './ShapeGrid.jsx'
 
-// moving hexagon background (not on landing)
 function PageBackground() {
   return (
     <div className="shared-page-background" aria-hidden="true">

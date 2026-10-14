@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-// fonts
 import '@fontsource/lilita-one/400.css'
 import '@fontsource/figtree/400.css'
 import '@fontsource/figtree/500.css'

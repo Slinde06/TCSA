@@ -13,7 +13,6 @@ const orangeScutes = [
   { x: 'calc(100% - 250px)', y: 225, size: 96, rotate: 4 },
 ]
 
-// landing page footer
 function Footer() {
   return (
     <footer className="landing-footer" id="contact">

@@ -1,65 +1,135 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import { DashboardContext } from './dashboardContext.js'
-import { sampleAnimals, sampleTasks } from '../data/sampleData.js'
-import { addDays, categoryFor, uid } from '../data/helpers.js'
+import { api } from '../data/api.js'
+import { categoryFor } from '../data/helpers.js'
 
-// animals + tasks shared by all the dashboard pages
-// TODO save to database
+async function fetchDashboard() {
+  try {
+    const me = await api('/me')
+    const [animals, tasks] = await Promise.all([api('/animals'), api('/tasks')])
+    return { status: 'ready', owner: me.username, animals, tasks }
+  } catch (err) {
+    if (err.status === 401) return { status: 'logged-out' }
+    return { status: 'failed', error: err.message }
+  }
+}
 
 export function DashboardProvider({ children }) {
-  const [animals, setAnimals] = useState(sampleAnimals)
-  const [tasks, setTasks] = useState(sampleTasks)
+  const [owner, setOwner] = useState(null)
+  const [status, setStatus] = useState('loading')
+  const [animals, setAnimals] = useState([])
+  const [tasks, setTasks] = useState([])
+  const [saveError, setSaveError] = useState('')
+  const animalsRef = useRef(animals)
 
-  const api = useMemo(
+  useEffect(() => {
+    animalsRef.current = animals
+  }, [animals])
+
+  const apply = useCallback((result) => {
+    setStatus(result.status)
+    setSaveError(result.error || '')
+    if (result.status === 'ready') {
+      setOwner(result.owner)
+      setAnimals(result.animals)
+      setTasks(result.tasks)
+    }
+  }, [])
+
+  useEffect(() => {
+    let stale = false
+    fetchDashboard().then((result) => {
+      if (!stale) apply(result)
+    })
+    return () => {
+      stale = true
+    }
+  }, [apply])
+
+  const load = useCallback(() => {
+    setStatus('loading')
+    return fetchDashboard().then(apply)
+  }, [apply])
+
+  const save = useCallback(
+    async (request) => {
+      try {
+        return await request()
+      } catch (err) {
+        if (err.status === 401) {
+          setStatus('logged-out')
+          return null
+        }
+        setSaveError(err.message)
+        load()
+        throw err
+      }
+    },
+    [load],
+  )
+
+  const value = useMemo(
     () => ({
+      owner,
+      status,
+      saveError,
+      clearSaveError: () => setSaveError(''),
+      reload: load,
       animals,
       tasks,
 
       getAnimal: (id) => animals.find((a) => a.id === id),
 
-      addAnimal(newAnimal) {
-        setAnimals((list) => [{ ...newAnimal, category: categoryFor(newAnimal.species) }, ...list])
+      async addAnimal(newAnimal) {
+        const saved = await save(() =>
+          api('/animals', { method: 'POST', body: { ...newAnimal, category: categoryFor(newAnimal.species) } }),
+        )
+        if (saved) setAnimals((list) => [saved, ...list])
+        return saved
       },
 
       updateAnimal(id, updater) {
-        setAnimals((list) =>
-          list.map((a) => {
-            if (a.id !== id) return a
-            const next = updater(a)
-            return { ...next, category: categoryFor(next.species) }
-          }),
-        )
+        const current = animalsRef.current.find((a) => a.id === id)
+        if (!current) return
+        const next = updater(current)
+        const updated = { ...next, category: categoryFor(next.species) }
+        animalsRef.current = animalsRef.current.map((a) => (a.id === id ? updated : a))
+        setAnimals(animalsRef.current)
+        save(() => api(`/animals/${encodeURIComponent(id)}`, { method: 'PUT', body: updated })).catch(() => {})
       },
 
-      deleteAnimal(id) {
+      async deleteAnimal(id) {
+        await save(() => api(`/animals/${encodeURIComponent(id)}`, { method: 'DELETE' }))
         setAnimals((list) => list.filter((a) => a.id !== id))
         setTasks((list) => list.filter((t) => t.animalId !== id))
       },
 
-      addTask(task) {
-        setTasks((list) => [...list, { id: uid(), completed: false, repeat: 'none', ...task }])
+      async addTask(task) {
+        const saved = await save(() => api('/tasks', { method: 'POST', body: task }))
+        if (saved) setTasks((list) => [...list, saved])
+        return saved
       },
 
-      // repeating tasks add the next one when ticked
-      toggleTask(id) {
+      async toggleTask(id) {
+        setTasks((list) => list.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)))
+        const result = await save(() => api(`/tasks/${id}/toggle`, { method: 'POST' })).catch(() => null)
+        if (!result) return
         setTasks((list) => {
-          const task = list.find((t) => t.id === id)
-          if (!task) return list
-          const updated = list.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
-          if (!task.completed && task.repeat !== 'none') {
-            const step = task.repeat === 'weekly' ? 7 : 1
-            const nextDate = addDays(task.date, step)
-            const exists = list.some(
-              (t) => t.animalId === task.animalId && t.description === task.description && t.date === nextDate,
-            )
-            if (!exists) updated.push({ ...task, id: uid(), date: nextDate, completed: false })
-          }
-          return updated
+          const updated = list.map((t) => (t.id === id ? result.task : t))
+          return result.created ? [...updated, result.created] : updated
         })
       },
+
+      async logout() {
+        await api('/logout', { method: 'POST' }).catch(() => {})
+        setStatus('logged-out')
+      },
     }),
-    [animals, tasks],
+    [owner, status, saveError, animals, tasks, load, save],
   )
 
-  return <DashboardContext.Provider value={api}>{children}</DashboardContext.Provider>
+  if (status === 'logged-out') return <Navigate to="/login" replace />
+
+  return <DashboardContext.Provider value={value}>{children}</DashboardContext.Provider>
 }

@@ -1,7 +1,5 @@
 import { useId } from 'react'
 
-// label + input/select/textarea for the dashboard forms
-// suffix puts a unit (kg, mm) inside the box
 function Field({ label, as = 'input', options = [], className = '', suffix, required, ...props }) {
   const id = useId()
   let control

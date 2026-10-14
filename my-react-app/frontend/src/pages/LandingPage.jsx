@@ -100,11 +100,9 @@ const dividerScutes = [
 function LandingPage() {
   return (
     <div className="landing-page">
-      {/* Hero */}
       <header className="landing-hero" style={{ backgroundImage: `url(${hero})` }}>
         <div className="landing-topbar">
           <img className="landing-left-logo" src={wordmark} alt="TCSA" />
-          {/* Quick links that scroll down to each section */}
           <nav className="landing-nav-right" aria-label="On this page">
             {QUICK_LINKS.map((link) => (
               <a key={link.href} href={link.href} className="landing-navbutton">
@@ -127,7 +125,6 @@ function LandingPage() {
         <p className="landing-npc-number">Registered NPC since {NPC_NUMBER}</p>
       </header>
 
-      {/* About */}
       <section className="landing-about" id="about">
         <Hexagons items={aboutScutesTop} className="landing-desktop-only" />
         <Hexagons items={aboutScutesBottom} />
@@ -158,14 +155,12 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Photo strip */}
       <div className="landing-photostrip">
         {GALLERY.map((photo) => (
           <img key={photo.alt} src={photo.src} alt={photo.alt} loading="lazy" />
         ))}
       </div>
 
-      {/* Support */}
       <section className="landing-support" id="support">
         <Hexagons items={supportScutes} color="var(--hex-grey)" outline="#9aa496" />
 
@@ -229,12 +224,10 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Shell divider */}
       <div className="landing-shell-divider">
         <Hexagons items={dividerScutes} color="var(--hex-grey)" outline="#9aa496" />
       </div>
 
-      {/* Endorsements & sponsors */}
       <section className="landing-partners">
         <div className="landing-container landing-columns-partners">
           <div>
