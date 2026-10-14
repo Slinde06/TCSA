@@ -253,9 +253,9 @@ function LandingPage() {
                 </li>
               ))}
             </ul>
-            <p className="landing-sponsornote">
-              Should you wish to join our sponsors, please <a href="#contact">contact {CONTACT.name}</a>.
-            </p>
+            <a className="landing-foodlink" href={CONTACT.whatsappLink} target="_blank" rel="noreferrer">
+                Should you wish to join our sponsors, please contact
+              </a>
           </div>
         </div>
       </section>

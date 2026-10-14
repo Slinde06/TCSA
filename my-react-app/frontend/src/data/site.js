@@ -5,8 +5,7 @@ export const CONTACT = {
   whatsappDisplay: '071 309 1665',
   whatsappLink: 'https://wa.me/27713091665',
   email: 'info.tortoiseconservation@gmail.com',
-  // TODO real facebook link
-  facebook: '#contact',
+  facebook: 'https://www.facebook.com/share/g/19eZTx7NFF/',
 }
 
 export const BANK = {

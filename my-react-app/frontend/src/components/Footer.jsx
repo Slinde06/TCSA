@@ -45,12 +45,11 @@ function Footer() {
             <li>
               <FacebookIcon />
               <a className="landing-underlined" href={CONTACT.facebook} target="_blank" rel="noreferrer">
-                Facebook
+                Join our Facebook group
               </a>
             </li>
           </ul>
         </div>
-
 
         <div className="landing-footerlogo">
           <img src={badge} alt="Tortoise Conservation South Africa logo" />
@@ -59,6 +58,9 @@ function Footer() {
 
       <div className="landing-footer-bottom">
         <span>© {year} Tortoise Conservation South Africa NPC</span>
+        <span className="landing-footer-student">
+          This is a student website and is not the official site of Tortoise Conservation South Africa.
+        </span>
         <Link to="/login">Owner login</Link>
       </div>
     </footer>
