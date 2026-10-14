@@ -347,3 +347,99 @@
 .landing-sponsornote a {
   color: inherit;
 }
+
+/* responsive */
+@media (max-width: 860px) {
+  .landing-columns-about,
+  .landing-support-grid,
+  .landing-columns-partners {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .landing-desktop-only {
+    display: none;
+  }
+
+  .landing-about .shared-hexagons {
+    opacity: 0.5;
+  }
+
+  .landing-species-banner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    margin-top: 60px;
+  }
+
+  .landing-species-banner p {
+    font-size: 1.05rem;
+  }
+
+  .landing-photostrip {
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+  }
+
+  .landing-photostrip img {
+    aspect-ratio: 1;
+  }
+
+  .landing-right-coffee {
+    padding-top: 0;
+  }
+
+  .landing-support-block {
+    margin-bottom: 40px;
+  }
+
+  .landing-support-block h3 {
+    font-size: 1.35rem;
+  }
+
+  .landing-shell-divider {
+    height: 160px;
+    transform: scale(0.6);
+    transform-origin: left top;
+    width: 166%;
+  }
+
+  .landing-sponsor-grid {
+    grid-template-columns: repeat(3, minmax(0, 96px));
+    gap: 18px;
+  }
+
+  .landing-sponsor-grid li {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .landing-npc-number {
+    left: 24px;
+    right: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .landing-hero {
+    padding-top: 150px;
+  }
+
+  .landing-topbar {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .landing-nav-right {
+    width: 100%;
+    max-width: 380px;
+    gap: 4px;
+  }
+
+  .landing-navbutton {
+    flex: 1;
+    padding: 9px 6px;
+    text-align: center;
+    font-size: 0.88rem;
+  }
+}

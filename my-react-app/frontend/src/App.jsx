@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 
 import DashboardLayout from './components/DashboardLayout.jsx'
@@ -13,12 +14,22 @@ import AnimalProfilePage from './pages/AnimalProfilePage.jsx'
 import AddAnimalPage from './pages/AddAnimalPage.jsx'
 import ReportPage from './pages/ReportPage.jsx'
 
+// go to top on page change
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 function App() {
   const { pathname } = useLocation()
   const isLanding = pathname === '/'
 
   return (
     <DashboardProvider>
+      <ScrollToTop />
       {!isLanding && <PageBackground />}
       <div className="app">
         <main className="app-main">

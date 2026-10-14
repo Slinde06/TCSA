@@ -1822,3 +1822,188 @@
     break-inside: avoid;
   }
 }
+
+/* responsive */
+@media (max-width: 1200px) {
+  .today-timeline-row {
+    grid-template-columns: 30px 100px 70px minmax(70px, 0.7fr) minmax(120px, 1.5fr) auto;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-split,
+  .addanimal-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-stat-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reports-banner {
+    padding-right: 26px;
+  }
+}
+
+@media (max-width: 820px) {
+  .today-timeline-row {
+    grid-template-columns: 30px 1fr auto;
+    grid-template-areas:
+      'check status time'
+      'check desc desc'
+      'check animal btn';
+    row-gap: 6px;
+    padding: 14px 16px;
+  }
+
+  .today-timeline-row .shared-checkbox {
+    grid-area: check;
+    align-self: start;
+  }
+  .today-timeline-status {
+    grid-area: status;
+  }
+  .today-timeline-time {
+    grid-area: time;
+    text-align: right;
+  }
+  .today-animal-link {
+    grid-area: animal;
+  }
+  .today-task-desc {
+    grid-area: desc;
+    font-weight: 600;
+  }
+  .today-complete-btn {
+    grid-area: btn;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .dashboard {
+    border-radius: 16px;
+  }
+
+  .dashboard-username {
+    display: none;
+  }
+
+  .dashboard-user {
+    padding: 3px;
+  }
+
+  /* full width tabs on phone */
+  .dashboard-tabs {
+    display: flex;
+    width: 100%;
+  }
+
+  .dashboard-tab {
+    flex: 1;
+    min-width: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .dashboard-add-btn {
+    width: 100%;
+  }
+
+  .profile-tabs {
+    gap: 10px;
+  }
+
+  /* scroll sideways */
+  .profile-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-left: calc(-1 * var(--page-pad));
+    margin-right: calc(-1 * var(--page-pad));
+    padding: 2px var(--page-pad) 8px;
+    scrollbar-width: none;
+  }
+
+  .profile-tabs .shared-button {
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+
+  .profile-table {
+    min-width: 560px;
+  }
+
+  .dashboard-stat-grid {
+    gap: 12px;
+  }
+
+  .dashboard-stat-label {
+    font-size: 0.8rem;
+  }
+
+  .animals-preview-body,
+  .reports-document-animal,
+  .reports-banner-animal {
+    grid-template-columns: 1fr;
+  }
+
+  .animals-preview-body .dashboard-animal-photo {
+    max-width: 220px;
+  }
+
+  .profile-banner {
+    grid-template-columns: 96px 1fr;
+    padding: 56px 16px 20px;
+  }
+
+  .profile-banner-photo {
+    width: 96px;
+  }
+
+  .profile-banner-actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .shared-form-grid.shared-form-cols-2,
+  .shared-form-grid.shared-form-cols-3,
+  .profile-readonly-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shared-form-span-2 {
+    grid-column: auto;
+  }
+
+  .dashboard-stats-bars li {
+    grid-template-columns: 110px 22px 1fr;
+  }
+
+  .reports-document-photos {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reports-document-contact {
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    word-break: break-all;
+  }
+
+  .reports-doc-head {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .dashboard-stat-card {
+    min-height: 84px;
+    padding: 12px 14px;
+  }
+
+  .today-complete-btn {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
