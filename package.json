@@ -1,0 +1,12 @@
+{
+  "name": "tcsa",
+  "private": true,
+  "description": "start front and bakend",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build": "npm ci --prefix my-react-app/frontend --include=dev && npm run build --prefix my-react-app/frontend && npm ci --omit=dev --prefix my-react-app/backend",
+    "start": "node my-react-app/backend/src/server.js"
+  }
+}
