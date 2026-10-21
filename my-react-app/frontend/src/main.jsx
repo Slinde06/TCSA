@@ -10,7 +10,12 @@ import '@fontsource/poppins/500.css'
 import '@fontsource/poppins/600.css'
 import '@fontsource/poppins/700.css'
 import './index.css'
+
+// buttons for google 
 import App from './App.jsx'
+import { setupClickTracking } from './analytics.js'
+
+setupClickTracking()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
