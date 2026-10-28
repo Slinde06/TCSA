@@ -65,5 +65,3 @@ Packaged the app with a Dockerfile, pushed the image to Amazon ECR, and ran it a
 - **Google Search Console and Analytics.** Finish setting up Search Console so Google can index the site, and fix Google Analytics so it properly tracks visitors and page views.
 - **Profile and Settings pages.** Add a profile page for the owner and a settings page to manage account details and dashboard preferences.
 - **Split the landing page into separate pages.** Break the single long landing page into Home, About, Support and Contact pages. This would make navigation clearer and give each section its own URL.
-
-## Credits
